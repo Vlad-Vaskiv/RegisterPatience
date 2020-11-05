@@ -38,11 +38,39 @@
             android:onClick="login"
             android:text="Увійти" />
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="reg"
-            android:text="Реєстрація" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ChangeFragment"
+                android:text="Реєстрація" />
+
+            <Button
+                android:id="@+id/cbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ChangeFragment"
+                android:text="Вибір лікаря" />
+
+            <Button
+                android:id="@+id/abutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ChangeFragment"
+                android:text="About" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/listFragment"
+            android:name="com.example.lab1.RegistrationFragment"
+            android:layout_width="match_parent"
+            android:layout_height="681dp" />
+
     </LinearLayout>
 
 

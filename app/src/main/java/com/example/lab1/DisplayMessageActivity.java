@@ -8,6 +8,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import timber.log.Timber;
+
 public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
@@ -35,18 +37,27 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                Timber.i("Opened Activity Select doctor");
             }});
 
-//        // Отримуємо повідомлення з об'єкту intent
-//        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-//
-//        // Створюємо текстове поле
-//        TextView textView = new TextView(this);
-//        textView.setTextSize(40);
-//        textView.setText(message);
-//
-//        // Встановлюємо текстове поле в системі компоновки activity
-//       setContentView(textView);
+    }
+    public void onStart(){
+        super.onStart();
+        Timber.i("onStart");
+    }
+
+    public void onResume(){
+        super.onResume();
+        Timber.i("onResume");
+    }
+
+    public void onPause(){
+        super.onPause();
+        Timber.i("onPause");
+    }
+
+    public void onStop(){
+        super.onStop();
+        Timber.i("onStop");
     }
 }

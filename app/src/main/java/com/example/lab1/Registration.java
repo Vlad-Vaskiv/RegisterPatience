@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import timber.log.Timber;
+
 public class Registration extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "EXTRA_MESSAGE";
@@ -15,6 +17,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        Timber.i("Opened activity registration");
     }
 
     // Обработка нажатия кнопки
@@ -22,7 +25,26 @@ public class Registration extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         // запуск activity
         startActivity(intent);
+        Timber.i("Opened button registration");
     }
 
+    public void onStart(){
+        super.onStart();
+        Timber.i("onStart");
+    }
 
+    public void onResume(){
+        super.onResume();
+        Timber.i("onResume");
+    }
+
+    public void onPause(){
+        super.onPause();
+        Timber.i("onPause");
+    }
+
+    public void onStop(){
+        super.onStop();
+        Timber.i("onStop");
+    }
 }

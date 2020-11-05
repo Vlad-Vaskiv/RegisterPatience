@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationFragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow>
+            <TextView
+                android:id="@+id/re_te"
+                android:layout_weight="0.5"
+                android:text="Реєстрація пацієнта"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="Прізвище"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_surname"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"  />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="Ім'я"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_name"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"  />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="По батькові"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_father"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"  />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="Дата народження"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_date"
+                android:layout_weight="1"
+                android:inputType="date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"  />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_email"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_weight="0.5"
+                android:text="Місто"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/reg_city"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/re_bu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Зареєструвати"
+                 />
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
