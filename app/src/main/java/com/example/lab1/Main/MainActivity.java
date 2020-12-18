@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
 import com.example.lab1.Menu.AboutFragment;
 import com.example.lab1.Menu.DatabaseHelper;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
-
+    ArrayList<Doctor> doctors = new ArrayList<Doctor>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(getApplicationContext());
 
+        // начальная инициализация списка
+        setInitialData();
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lists);
+        // создаем адаптер
+        StateAdapter adapter = new StateAdapter(this, doctors);
+        // устанавливаем для списка адаптер
+        recyclerView.setAdapter(adapter);
+
         //TextView usernameTextView = (TextView)findViewById(R.id.showUsername);
       //  Button usernameButton = (Button)findViewById(R.id.butuser);
 
@@ -91,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
 //    public void createUsername(){
 //        usernameViewModel.createUsername();
 //    }
+
+    private void setInitialData(){
+
+        doctors.add(new Doctor ("Віктор", "Хірург", R.drawable.hir));
+        doctors.add(new Doctor ("Олена", "Терапевт", R.drawable.tera));
+        doctors.add(new Doctor ("Олег", "Стоматолог", R.drawable.sto));
+        doctors.add(new Doctor ("Ольга", "Психотерапевт", R.drawable.ps));
+        doctors.add(new Doctor ("Марина", "Окуліст", R.drawable.ok));
+    }
 
     public void reg(View view) {
         Intent intent = new Intent(this, Registration.class);
