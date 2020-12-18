@@ -1,4 +1,4 @@
-package com.example.lab1;
+package com.example.lab1.Menu;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.lab1.R;
 
 import timber.log.Timber;
 

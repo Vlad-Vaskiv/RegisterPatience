@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main.MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,10 +33,26 @@
             android:hint="Введіть пароль" />
 
         <Button
+            android:id="@+id/butuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="login"
+            android:onClick="onClick"
             android:text="Увійти" />
+
+        <TextView
+            android:id="@+id/showUsername"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textColor="#f44336"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"/>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="111dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,11 +79,18 @@
                 android:layout_height="wrap_content"
                 android:onClick="ChangeFragment"
                 android:text="About" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add"
+                android:onClick="add"
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <fragment
             android:id="@+id/listFragment"
-            android:name="com.example.lab1.RegistrationFragment"
+            android:name="com.example.lab1.Menu.RegistrationFragment"
             android:layout_width="match_parent"
             android:layout_height="681dp" />
 

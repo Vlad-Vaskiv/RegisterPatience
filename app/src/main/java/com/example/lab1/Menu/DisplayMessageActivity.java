@@ -1,4 +1,4 @@
-package com.example.lab1;
+package com.example.lab1.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.lab1.R;
 
 import timber.log.Timber;
 

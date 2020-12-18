@@ -1,27 +1,54 @@
-package com.example.lab1;
+package com.example.lab1.Main;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent; // подключаем класс Intent
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View; // подключаем класс View для обработки нажатия кнопки
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText; // подключаем класс EditText
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import com.example.lab1.Menu.AboutFragment;
+import com.example.lab1.Menu.DatabaseHelper;
+import com.example.lab1.Menu.DisplayMessageActivity;
+import com.example.lab1.Menu.Registration;
+import com.example.lab1.Menu.RegistrationFragment;
+import com.example.lab1.Menu.SelectdoctorFragment;
+import com.example.lab1.Menu.UserActivity;
+import com.example.lab1.Menu.UsernameViewModel;
+import com.example.lab1.R;
 
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    public Timer timer = new Timer();
+    public com.example.lab1.Timer timer = new com.example.lab1.Timer();
     public final static String K_REV = "k_rev";
     public int revenue=0;
     public final static String EXTRA_MESSAGE = "EXTRA_MESSAGE";
+
+    ListView userList;
+    TextView header;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase db;
+    Cursor userCursor;
+    SimpleCursorAdapter userAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +59,38 @@ public class MainActivity extends AppCompatActivity {
         {
             revenue = savedInstanceState.getInt(K_REV, 1);
         }
+
+        header = (TextView)findViewById(R.id.showUsername);
+        userList = (ListView)findViewById(R.id.list);
+
+        userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
+
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+
+        //TextView usernameTextView = (TextView)findViewById(R.id.showUsername);
+      //  Button usernameButton = (Button)findViewById(R.id.butuser);
+
+//        usernameButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                createUsername();
+//            }
+//        });
+       // UsernameViewModel usernameViewModel = new ViewModelProvider(this).get(UsernameViewModel.class);
+      //  usernameViewModel.createUsername();
+
     }
+
+//    public void createUsername(){
+//        usernameViewModel.createUsername();
+//    }
 
     public void reg(View view) {
         Intent intent = new Intent(this, Registration.class);
@@ -112,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onStart(){
         super.onStart();
@@ -122,6 +181,25 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         Timber.i("onResume");
+
+
+        // открываем подключение
+        db = databaseHelper.getReadableDatabase();
+
+        //получаем данные из бд в виде курсора
+        userCursor =  db.rawQuery("select * from "+ DatabaseHelper.TABLE, null);
+        // определяем, какие столбцы из курсора будут выводиться в ListView
+        String[] headers = new String[] {DatabaseHelper.COLUMN_NAME, DatabaseHelper.COLUMN_YEAR};
+        // создаем адаптер, передаем в него курсор
+        userAdapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item,
+                userCursor, headers, new int[]{android.R.id.text1, android.R.id.text2}, 0);
+        header.setText("Найдено элементов: " + String.valueOf(userCursor.getCount()));
+        userList.setAdapter(userAdapter);
+    }
+
+    public void add(View view){
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -135,12 +213,33 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Timber.i("onDestroy");
         timer.stopTimerTotal();
+        db.close();
+        userCursor.close();
     }
 
     @Override
     public void onStop(){
         super.onStop();
         Timber.i("onStop");
+    }
+
+    public void onClick(View view){
+        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT, age INTEGER)");
+        db.execSQL("INSERT INTO users VALUES ('Vlad Vaskivchuk', 20);");
+
+        Cursor query = db.rawQuery("SELECT * FROM users;", null);
+        TextView textView = (TextView) findViewById(R.id.showUsername);
+        if(query.moveToFirst()){
+            do{
+                String name = query.getString(0);
+                int age = query.getInt(1);
+                textView.append("Name: " + name + " Age: " + age + "\n");
+            }
+            while(query.moveToNext());
+        }
+        query.close();
+        db.close();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.lab1;
+package com.example.lab1.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.lab1.Main.MainActivity;
+import com.example.lab1.R;
 
 import timber.log.Timber;
 
